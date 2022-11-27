@@ -1,6 +1,7 @@
 import logging
 
 from chalice import Chalice
+from chalicelib.db import get_app_db
 
 app = Chalice(app_name='chalice-demo')
 app.log.setLevel(logging.DEBUG)
@@ -11,4 +12,4 @@ def user_signup():
 
     app.log.debug(f"Received JSON payload: {body}")
 
-    return body
+    return get_app_db().user_signup(body)

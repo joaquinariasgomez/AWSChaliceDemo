@@ -45,3 +45,10 @@ $ aws dynamodb create-table --table-name chalice-demo-table-dev \
   --attribute-definitions AttributeName=first_name,AttributeType=S \
   --key-schema AttributeName=first_name,KeyType=HASH \
   --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+
+Ejemplo de curl para realizar peticiones a nuestro API Gateway:
+$ curl -X POST localhost:8000/signup -d '{
+    "first_name": "joaquin",
+    "email": "joaquinarias@gmail.com",
+    "age": 27
+}' -H 'Content-Type: application/json'
