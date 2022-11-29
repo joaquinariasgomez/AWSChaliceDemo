@@ -13,16 +13,23 @@ Simple demo for creating a serverless AWS app using Chalice
   region=YOUR_REGION
 
 ## Primeros pasos
-1. Iniciar un entorno virtual e instalar chalice dentro:
+1. Iniciar un entorno virtual con la versión de [Python requerida](#requisitos):
 $ python3 -m venv .env
 $ source .env/bin/activate
+
+2. Moverse hacia directorio de la demo e instalar las dependencias:
+(.env) $ cd chalice-demo
 (.env) $ pip install -r requirements-dev.txt
 
-2. Desplegar servicio de prueba y probar la API desplegada
+3. Desplegar servicio de prueba y probar la API desplegada. Primero,
+   renombraremos a *app.py* el fichero que contendrá la clase principal, para
+que Chalice lo localice. Después, probaremos a desplegar usando *chalice
+deploy*:
+$ mv hello_world.py app.py
 $ chalice deploy
-(.env) $ curl *url de API Gateway recibida*
+(.env) $ curl $(chalice url)
 
-Opcionalmente, se puede ejecutar chalice delete para liberar los recursos
+4. Por último, probaremos a liberar recursos de AWS con *chalice delete*. Este comando liberará los recursos
 creados en AWS, como lo son el rol de IAM, la función lambda y la API Rest de
 API Gateway de la siguiente forma:
 (.env) $ chalice delete
@@ -30,9 +37,6 @@ API Gateway de la siguiente forma:
 Opcionalmente, puedes desplegar la aplicación localmente con el siguiente
 comando:
 $ chalice local --autoreload
-
-Para mostrar la url publicada por API Gateway:
-$ chalice url
 
 ## La aplicación que montaremos
 
