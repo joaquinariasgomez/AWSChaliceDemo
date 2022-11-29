@@ -47,8 +47,38 @@ $ aws dynamodb create-table --table-name chalice-demo-table-dev \
   --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 
 Ejemplo de curl para realizar peticiones a nuestro API Gateway:
-$ curl -X POST localhost:8000/signup -d '{
+$ curl -X POST $(chalice url)/signup -d '{
     "first_name": "joaquin",
     "email": "joaquinarias@gmail.com",
     "age": 27
 }' -H 'Content-Type: application/json'
+
+Politica a meter en .chalice/policy-dev.json:
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:Query"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:*:*:table/chalice-demo-table-dev"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}

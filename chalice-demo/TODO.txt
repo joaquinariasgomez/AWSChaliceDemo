@@ -1,1 +1,2 @@
 - renombrar app a hello-world o user-signup, lo que toque
+- limpiar README
