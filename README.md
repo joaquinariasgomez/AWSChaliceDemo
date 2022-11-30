@@ -40,6 +40,8 @@ $ chalice local --autoreload
 
 ## La aplicación que montaremos
 
+![Alt text](./arquitectura.svg "Arquitectura del sistema")
+
 Para crear la base de datos, ejecutaremos el siguiente comando:
 $ aws dynamodb create-table --table-name chalice-demo-table-dev \
   --attribute-definitions AttributeName=first_name,AttributeType=S \
@@ -82,3 +84,6 @@ Politica a meter en .chalice/policy-dev.json:
         }
     ]
 }
+
+Añadir "autogen_policy": false
+en .chalice/config.json
